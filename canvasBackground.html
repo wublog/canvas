@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvasBackground</title>
+</head>
+<body>
+    <div style="width: 800px;height: 800px;border: 1px solid #CCC;margin: 0 auto;">
+        <canvas id="canvas"></canvas>
+    </div>
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+
+            canvas.width = 1200;
+            canvas.height = 800;
+
+            var backCanvas = createBackgroundCanvas();
+            var pattern = context.createPattern(backCanvas,"repeat");
+            context.fillStyle = pattern;
+            context.fillRect(0,0,800,800);
+        }
+
+        function createBackgroundCanvas() {
+            var backgroundCanvas = document.createElement("canvas");
+            backgroundCanvas.height = 100;
+            backgroundCanvas.width = 100;
+
+            var backCanvasContext = backgroundCanvas.getContext("2d");
+            drawStar(backCanvasContext,50,50,50,0);
+            return backgroundCanvas;
+        }
+
+
+        function drawStar(cxt,r,x,y,cnt) {
+            cxt.save();
+
+            cxt.translate(x,y);
+            cxt.rotate(cnt/180*Math.PI);
+            cxt.scale(r,r);
+            drawPath(cxt);
+            cxt.fillStyle = "#fb3";
+            cxt.strokeStyle = "#fd5";
+            //cxt.lineWidth = 3;
+            //cxt.lineJoin = "round";
+            cxt.fill();
+            //cxt.stroke();
+
+            cxt.restore();
+        }
+
+        function drawPath(cxt) {
+            cxt.beginPath();
+            for(var i = 0 ;i<5;i++){
+                cxt.lineTo(Math.cos((18+i*72)/180*Math.PI),-Math.sin((18+72*i)/180*Math.PI));
+                cxt.lineTo(Math.cos((54+i*72)/180*Math.PI)*0.5,-Math.sin((54+72*i)/180*Math.PI)*0.5);
+            }
+            cxt.closePath();
+        }
+    </script>
+</body>
+</html>
