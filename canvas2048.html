@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvas2048</title>
+</head>
+<body>
+
+<div style="width: 1200px;height: 800px;border: 1px solid #CCC;margin: 0 auto;">
+    <canvas id="canvas"></canvas>
+</div>
+<script>
+    window.onload = function () {
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        canvas.width = 1200;
+        canvas.height = 800;
+
+
+        /*context.lineWidth = 2;
+         for(var i = 0;i<10;i++){
+         context.beginPath();
+         context.arc(50+i*100,100,40,0,2*Math.PI*(i+1)/10);
+         //context.closePath();
+         //context.fillStyle = "blue";
+         //context.fill();
+         context.stroke();
+         }
+         for(var i = 0;i<10;i++){
+         context.beginPath();
+         context.arc(50+i*100,200,40,0,2*Math.PI*(i+1)/10);
+         context.closePath();
+         //context.fillStyle = "blue";
+         //context.fill();
+         context.stroke();
+         }
+         for(var i = 0;i<10;i++){
+         context.beginPath();
+         context.arc(50+i*100,300,40,0,2*Math.PI*(i+1)/10,true);
+         //context.closePath();
+         //context.fillStyle = "blue";
+         //context.fill();
+         context.stroke();
+         }
+         for(var i = 0;i<10;i++){
+         context.beginPath();
+         context.arc(50+i*100,400,40,0,2*Math.PI*(i+1)/10,true);
+         context.closePath();
+         //context.fillStyle = "blue";
+         //context.fill();
+         context.stroke();
+         }
+         for(var i = 0;i<10;i++){
+         context.beginPath();
+         context.arc(50+i*100,500,40,0,2*Math.PI*(i+1)/10);
+         context.closePath();
+         context.fillStyle = "blue";
+         context.fill();
+         context.stroke();
+         }
+         for(var i = 0;i<10;i++){
+         context.beginPath();
+         context.arc(50+i*100,600,40,0,2*Math.PI*(i+1)/10,true);
+         context.closePath();
+         context.fillStyle = "blue";
+         context.fill();
+         context.stroke();
+         }*/
+        drawRoundRectFill(context, 150, 150, 500, 500, 10, "#bbaba0");
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 4; j++) {
+                drawRoundRectFill(context, 170 + i * 120, 170 + j * 120, 100, 100, 6, "#ccc0b3")
+            }
+        }
+
+    }
+    /*
+     *绘制边框圆角矩形
+     */
+    function drawRoundRectStroke(cxt, x, y, width, height, radius, lineWidth, strokeColor) {
+        cxt.save();
+
+        cxt.translate(x, y);
+        pathRoundRect(cxt, width, height, radius);
+        cxt.lineWidth = lineWidth || 5;
+        cxt.strokeStyle = strokeColor || "black";
+        cxt.stroke();
+        cxt.restore();
+    }
+    /*
+     *绘制填充颜色圆角矩形
+     */
+    function drawRoundRectFill(cxt, x, y, width, height, radius, fillColor) {
+        cxt.save();
+
+        cxt.translate(x, y);
+        pathRoundRect(cxt, width, height, radius);
+        //cxt.lineWidth = 5;
+        cxt.fillStyle = fillColor || "black";
+        cxt.fill();
+        cxt.restore();
+    }
+
+    function pathRoundRect(cxt, width, height, radius) {
+        cxt.beginPath();
+        cxt.arc(width, height, radius, 0, 0.5 * Math.PI);
+        cxt.lineTo(0, height + radius);
+        cxt.arc(0, height, radius, 0.5 * Math.PI, 1.0 * Math.PI);
+        cxt.lineTo(-radius, 0);
+        cxt.arc(0, 0, radius, 1.0 * Math.PI, 1.5 * Math.PI);
+        cxt.lineTo(width, -radius);
+        cxt.arc(width, 0, radius, 1.5 * Math.PI, 2.0 * Math.PI);
+        //cxt.lineTo(height+radius,height);
+
+        cxt.closePath();
+    }
+</script>
+</body>
+</html>
