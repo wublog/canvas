@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvas-font</title>
+</head>
+<body>
+
+<div style="width: 800px;height: 800px;border: 1px solid #CCC;margin: 0 auto;">
+    <canvas id="canvas"></canvas>
+</div>
+
+<script>
+    window.onload = function () {
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        canvas.width = 800;
+        canvas.height = 800;
+
+
+
+        context.font = "bold 40px Arial";
+        context.fillStyle = "#f4c";
+        context.strokeStyle = "#f4c";
+        context.lineWidth = 2;
+        context.fillText("I love Nana",40,40);
+
+        context.strokeText("I love Nana",40,100);
+
+
+        var liner = context.createLinearGradient(0,0,800,0);
+             liner.addColorStop(0.0,"red");
+        liner.addColorStop(0.25,"blue");
+        liner.addColorStop(0.5,"yellow");
+        liner.addColorStop(0.0,"green");
+        liner.addColorStop(0.0,"purple");
+
+
+        context.fillStyle = liner;
+        context.fillText("I love Nana",40,160);
+
+        context.strokeStyle = liner;
+
+        context.strokeText("I love Nana",40,220);
+
+        var backgroundImg = new  Image();
+        backgroundImg.src = "bgImg.jpg";
+        var pattern
+        backgroundImg.onload = function(){
+            pattern = context.createPattern(backgroundImg,"repeat");
+            context.fillStyle = pattern;
+            context.font = "bold 100px  Arial";
+            context.fillText("I love Nana",40,320);
+            context.strokeText("I love Nana",40,320);
+        }
+    }
+</script>
+</body>
+</html>

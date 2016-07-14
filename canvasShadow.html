@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvasShadow</title>
+</head>
+<body>
+<div style="width: 1200px;height: 800px;border: 1px solid #CCC;margin: 0 auto;">
+    <canvas id="canvas"></canvas>
+</div>
+
+<script>
+    window.onload = function () {
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        canvas.width = 1200;
+        canvas.height = 800;
+
+        context.shadowColor = "#058";
+        context.shadowOffsetX = 10;
+        context.shadowOffsetY = 10;
+        context.shadowBlur = 5;
+
+        context.fillStyle = "#f4c";
+
+        context.fillRect(100,100,300,300);
+
+        context.font = "bold 40px Arial";
+        context.fillText("canvas",500,500);
+    }
+</script>
+</body>
+</html>
